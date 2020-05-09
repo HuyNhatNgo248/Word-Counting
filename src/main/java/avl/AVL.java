@@ -1,7 +1,5 @@
 package avl;
 
-import org.w3c.dom.Node;
-
 public class AVL {
 
     public Node root;
@@ -16,11 +14,11 @@ public class AVL {
      * find w in the tree. return the node containing w or
      * null if not found
      */
-    public org.w3c.dom.Node search(String w) {
+    public Node search(String w) {
         return search(root, w);
     }
 
-    private org.w3c.dom.Node search(org.w3c.dom.Node n, String w) {
+    private Node search(Node n, String w) {
         if (n == null) {
             return null;
         }
@@ -38,7 +36,7 @@ public class AVL {
      */
     public void bstInsert(String w) {
         if (root == null) {
-            root = new org.w3c.dom.Node(w);
+            root = new Node(w);
             size = 1;
             return;
         }
