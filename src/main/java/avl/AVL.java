@@ -130,7 +130,11 @@ public class AVL {
         Node temp = null;
         ArrayList<Node> lst = new ArrayList<>();
         //null root
-
+        if (n == null) {
+            root = new Node(w, n);
+            size++;
+            return;
+        }
         while (current != null) {
             if (w.compareTo(current.word) < 0) {
                 temp = current;
@@ -354,26 +358,7 @@ public class AVL {
 class testAVL {
     public static void main(String[] args) {
         AVL a = new AVL();
-        a.bstInsert("m");
-        a.search("m").height = 2;
-        a.bstInsert("p");
-        a.search("p").height = 1;
-        a.bstInsert("r");
-        a.search("r").height = 0;
-        a.bstInsert("b");
-        a.search("b").height = 1;
-        a.bstInsert("c");
-        a.search("c").height = 0;
-        a.bstInsert("a");
-        a.search("a").height = 0;
-        //String[] str = {"m", "p", "r", "b"};
-//        Arrays.sort(str);
-//        for (String s: str)
-//            System.out.print(s + " ");
-//        System.out.println();
-
-        a.rebalance(a.search("p"));
-        a.printTree();
+        a.avlInsert("moo");
         a.preorder(a.root);
         System.out.println();
         a.inorder(a.root);
@@ -383,30 +368,7 @@ class testAVL {
         System.out.println();
 
 
-        a.rebalance(a.search("r"));
-        a.printTree();
-        a.preorder(a.root);
-        System.out.println();
-        a.inorder(a.root);
-        System.out.println();
-        a.postorder(a.root);
-        System.out.println();
-        System.out.println();
-
-
-        a.rebalance(a.search("b"));
-        a.printTree();
-        a.preorder(a.root);
-        System.out.println();
-        a.inorder(a.root);
-        System.out.println();
-        a.postorder(a.root);
-        System.out.println();
-        System.out.println();
-
-
-        a.rebalance(a.search("m"));
-        a.printTree();
+        a.avlInsert("quack");
         System.out.println();
         a.preorder(a.root);
         System.out.println();
@@ -417,16 +379,59 @@ class testAVL {
         System.out.println();
 
 
-        a.rebalance(a.search("a"));
-        a.printTree();
+        a.avlInsert("marmot");
         System.out.println();
         a.preorder(a.root);
         System.out.println();
         a.inorder(a.root);
         System.out.println();
         a.postorder(a.root);
+        System.out.println();
+        System.out.println();
 
 
+        a.avlInsert("oink");
+        System.out.println();
+        a.preorder(a.root);
+        System.out.println();
+        a.inorder(a.root);
+        System.out.println();
+        a.postorder(a.root);
+        System.out.println();
+        System.out.println();
+
+
+        a.avlInsert("baa");
+        System.out.println();
+        a.preorder(a.root);
+        System.out.println();
+        a.inorder(a.root);
+        System.out.println();
+        a.postorder(a.root);
+        System.out.println();
+        System.out.println();
+
+
+        a.avlInsert("moo");
+        System.out.println();
+        a.preorder(a.root);
+        System.out.println();
+        a.inorder(a.root);
+        System.out.println();
+        a.postorder(a.root);
+        System.out.println();
+        System.out.println();
+
+
+        a.avlInsert("meow");
+        System.out.println();
+        a.preorder(a.root);
+        System.out.println();
+        a.inorder(a.root);
+        System.out.println();
+        a.postorder(a.root);
+        System.out.println();
+        System.out.println();
     }
 
 
