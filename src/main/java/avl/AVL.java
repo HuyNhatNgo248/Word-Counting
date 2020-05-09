@@ -190,7 +190,7 @@ public class AVL {
 
 
     private int getbalance(Node n) {
-        return n.right.height - n.left.height;
+        return height(n.right) - height(n.left);
     }
 
 
@@ -271,14 +271,61 @@ public class AVL {
             right = r;
         }
     }
+
+    //delete later
+    public void preorder(Node root) {
+        if (root == null)
+            return;
+        System.out.print(root.word + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+
+    public void inorder(Node root) {
+        if (root == null)
+            return;
+        inorder(root.left);
+        System.out.print(root.word + " ");
+        inorder(root.right);
+    }
+
+    public void postorder(Node root) {
+        if (root == null)
+            return;
+        postorder(root.left);
+        postorder(root.right);
+        System.out.print(root.word + " ");
+    }
 }
 
 class testAVL {
     public static void main(String[] args) {
         AVL a = new AVL();
+        a.bstInsert("m");
+        a.search("m").height = 2;
+        a.bstInsert("p");
+        a.search("p").height = 1;
+        a.bstInsert("r");
+        a.search("r").height = 0;
         a.bstInsert("b");
-        a.bstInsert("a");
+        a.search("b").height = 1;
         a.bstInsert("c");
-
+        a.search("c").height = 0;
+        a.bstInsert("a");
+        a.search("a").height = 0;
+        //String[] str = {"m", "p", "r", "b"};
+//        Arrays.sort(str);
+//        for (String s: str)
+//            System.out.print(s + " ");
+//        System.out.println();
+        a.rebalance(a.search("p"));
+        a.preorder(a.root);
+        System.out.println();
+        System.out.println();
+        a.inorder(a.root);
+        System.out.println();System.out.println();
+        a.postorder(a.root);
     }
+
+
 }
