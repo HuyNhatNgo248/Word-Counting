@@ -78,10 +78,10 @@ public class AVL {
     }
 
     private void updateHeight(Node n, int left, int right) {
-        if (n == null)
-            return;
+        if (n == root)
+            n.height = Integer.max(left, right) + 1;
         else {
-            n.height = Integer.max(left, right);
+            n.height = Integer.max(left, right) + 1;
             Node parentLeft = n.parent.left;
             Node parentRight = n.parent.right;
             if (parentLeft == null && parentRight != null)
