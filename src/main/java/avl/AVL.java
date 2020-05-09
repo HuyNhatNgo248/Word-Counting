@@ -68,10 +68,37 @@ public class AVL {
             if (w.compareTo(temp.word) > 0) {
                 temp.right = new Node(w, temp);
                 size++;
+                updateHeight(n);
             } else {
                 temp.left = new Node(w, temp);
                 size++;
+                updateHeight(n);
             }
+        }
+    }
+
+    private void updateHeight(Node n) {
+        if (n == null)
+            return;
+        else {
+            n.height = height(n);
+            updateHeight(n.parent);
+        }
+    }
+
+    private int height(Node n) {
+        if (n == null)
+            return -1;
+        return getHeight(n) - 1;
+    }
+
+    private int getHeight(Node n) {
+        if (n == null)
+            return 0;
+        else {
+            int left = getHeight(n.right);
+            int right = getHeight(n.left);
+            return 1 + Integer.max(left, right);
         }
     }
 
@@ -109,6 +136,7 @@ public class AVL {
 
         y.left = x;
         x.parent = y;
+        updateHeight(x);
     }
 
     /**
@@ -130,6 +158,7 @@ public class AVL {
         else y.parent.left = x;
         x.right = y;
         y.parent = x;
+        updateHeight(y);
     }
 
     /**
@@ -138,7 +167,32 @@ public class AVL {
      */
     public void rebalance(Node n) {
         // TODO
+        if (getbalance(n) < -1) {
+            if (getbalance(n.left) < 0) {
+                //case1
+                rightRotate(n);
+            } else {
+                //case2
+                leftRotate(n.left);
+                rightRotate(n);
+            }
+        } else if (getbalance(n) > 1) {
+            if (getbalance(n.right) < 0) {
+                //case 3
+                rightRotate(n.right);
+                leftRotate(n);
+            } else {
+                //case 4
+                leftRotate(n);
+            }
+        }
     }
+
+
+    private int getbalance(Node n) {
+        return n.right.height - n.left.height;
+    }
+
 
     /**
      * remove the word w from the tree
@@ -222,13 +276,10 @@ public class AVL {
 class testAVL {
     public static void main(String[] args) {
         AVL a = new AVL();
-        a.bstInsert("moo");
-        a.bstInsert("quack");
-        a.bstInsert("neigh");
-
-
-        a.printTree();
-        System.out.println();
+        a.bstInsert("b");
+        a.bstInsert("a");
+        a.bstInsert("c");
+        System.out.println(a.height(a.root.right));
 
     }
 }
