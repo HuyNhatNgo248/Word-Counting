@@ -81,15 +81,17 @@ public class AVL {
         if (n == null)
             return;
         else {
-            n.height = Integer.max(left, right) + 1;
-            if (n.parent.left == null && n.parent.right != null)
-                updateHeight(n.parent, -1, n.parent.right.height);
-            else if (n.parent.left != null && n.parent.right == null)
-                updateHeight(n.parent, n.parent.left.height, -1);
-            else if (n.parent.left != null && n.parent.right != null)
+            n.height = Integer.max(left, right);
+            Node parentLeft = n.parent.left;
+            Node parentRight = n.parent.right;
+            if (parentLeft == null && parentRight != null)
+                updateHeight(n.parent, -1, parentRight.height);
+            else if (parentLeft != null && parentRight == null)
+                updateHeight(n.parent, parentLeft.height, -1);
+            else if (parentLeft != null && parentRight != null)
                 updateHeight(n.parent, -1, -1);
             else
-                updateHeight(n.parent, n.parent.left.height, n.parent.right.height);
+                updateHeight(n.parent, parentLeft.height, parentRight.height);
         }
     }
 
