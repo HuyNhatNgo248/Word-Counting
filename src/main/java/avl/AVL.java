@@ -66,10 +66,10 @@ public class AVL {
             return;
         else {
             if (w.compareTo(temp.word) > 0) {
-                temp.right = new Node(w);
+                temp.right = new Node(w, temp);
                 size++;
             } else {
-                temp.left = new Node(w);
+                temp.left = new Node(w, temp);
                 size++;
             }
         }
@@ -222,11 +222,13 @@ public class AVL {
 class testAVL {
     public static void main(String[] args) {
         AVL a = new AVL();
-        a.bstInsert("1");
-        System.out.println("size: " + a.getSize());
-        a.bstInsert("2");
-        System.out.println("size: " + a.getSize());
-        a.bstInsert("1");
-        System.out.println("size: " + a.getSize());
+        a.bstInsert("moo");
+        a.bstInsert("quack");
+        a.bstInsert("neigh");
+
+
+        a.printTree();
+        System.out.println();
+
     }
 }
