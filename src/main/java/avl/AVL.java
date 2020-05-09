@@ -50,8 +50,6 @@ public class AVL {
         Node current = n;
         Node parent = null;
         //null root
-        if (n == null)
-            n = new Node(w);
 
         while (current != null) {
             if (w.compareTo(current.word) < 0) {
@@ -68,10 +66,10 @@ public class AVL {
             return;
         else {
             if (w.compareTo(parent.word) > 0) {
-                parent.right.word = w;
+                parent.right = new Node(w);
                 size++;
             } else {
-                parent.left.word = w;
+                parent.left = new Node(w);
                 size++;
             }
         }
@@ -196,7 +194,12 @@ public class AVL {
 
 class testAVL {
     public static void main(String[] args) {
-        String s = "abc";
-        System.out.println("checking: " + s.compareTo("abcd"));
+        AVL a = new AVL();
+        a.bstInsert("1");
+        System.out.println("size: " + a.getSize());
+        a.bstInsert("2");
+        System.out.println("size: " + a.getSize());
+        a.bstInsert("1");
+        System.out.println("size: " + a.getSize());
     }
 }
