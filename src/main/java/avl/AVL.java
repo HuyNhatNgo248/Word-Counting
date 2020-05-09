@@ -279,7 +279,6 @@ class testAVL {
         a.bstInsert("b");
         a.bstInsert("a");
         a.bstInsert("c");
-        System.out.println(a.height(a.root.right));
 
     }
 }
