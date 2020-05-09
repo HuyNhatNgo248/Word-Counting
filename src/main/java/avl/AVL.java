@@ -82,10 +82,14 @@ public class AVL {
             return;
         else {
             n.height = Integer.max(left, right) + 1;
-            if (n.parent.left == null)
+            if (n.parent.left == null && n.parent.right != null)
                 updateHeight(n.parent, -1, n.parent.right.height);
-            else
+            else if (n.parent.left != null && n.parent.right == null)
                 updateHeight(n.parent, n.parent.left.height, -1);
+            else if (n.parent.left != null && n.parent.right != null)
+                updateHeight(n.parent, -1, -1);
+            else
+                updateHeight(n.parent, n.parent.left.height, n.parent.right.height);
         }
     }
 
@@ -333,7 +337,8 @@ class testAVL {
         System.out.println();
         System.out.println();
         a.inorder(a.root);
-        System.out.println();System.out.println();
+        System.out.println();
+        System.out.println();
         a.postorder(a.root);
     }
 
