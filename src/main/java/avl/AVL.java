@@ -211,7 +211,7 @@ public class AVL {
             return n.right.height + 1;
         else if (n.left != null && n.right == null)
             return -1 - n.left.height;
-        else if (n.left != null && n.right != null)
+        else if (n.left == null && n.right == null)
             return 0;
         else
             return n.right.height - n.left.height;
@@ -342,14 +342,62 @@ class testAVL {
 //        for (String s: str)
 //            System.out.print(s + " ");
 //        System.out.println();
+
         a.rebalance(a.search("p"));
+        a.printTree();
         a.preorder(a.root);
-        System.out.println();
         System.out.println();
         a.inorder(a.root);
         System.out.println();
+        a.postorder(a.root);
+        System.out.println();
+        System.out.println();
+
+
+        a.rebalance(a.search("r"));
+        a.printTree();
+        a.preorder(a.root);
+        System.out.println();
+        a.inorder(a.root);
         System.out.println();
         a.postorder(a.root);
+        System.out.println();
+        System.out.println();
+
+
+        a.rebalance(a.search("b"));
+        a.printTree();
+        a.preorder(a.root);
+        System.out.println();
+        a.inorder(a.root);
+        System.out.println();
+        a.postorder(a.root);
+        System.out.println();
+        System.out.println();
+
+
+        a.rebalance(a.search("m"));
+        a.printTree();
+        System.out.println();
+        a.preorder(a.root);
+        System.out.println();
+        a.inorder(a.root);
+        System.out.println();
+        a.postorder(a.root);
+        System.out.println();
+        System.out.println();
+
+
+        a.rebalance(a.search("a"));
+        a.printTree();
+        System.out.println();
+        a.preorder(a.root);
+        System.out.println();
+        a.inorder(a.root);
+        System.out.println();
+        a.postorder(a.root);
+
+
     }
 
 
