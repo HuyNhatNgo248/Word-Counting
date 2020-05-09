@@ -1,5 +1,7 @@
 package avl;
 
+import java.util.ArrayList;
+
 public class AVL {
 
     public Node root;
@@ -124,13 +126,40 @@ public class AVL {
      *  precondition: the tree is AVL balanced and n is not null */
     private void avlInsert(Node n, String w) {
         // TODO
-        if (n == null)
-            n = new Node(w);
-        if (w.compareTo(n.word) > 0)
-            avlInsert(n.right, w);
-        else if (w.compareTo(n.word) < 0)
-            avlInsert(n.left, w);
-        rebalance(n);
+        Node current = n;
+        Node temp = null;
+        ArrayList<Node> lst = new ArrayList<>();
+        //null root
+
+        while (current != null) {
+            if (w.compareTo(current.word) < 0) {
+                temp = current;
+                lst.add(temp);
+                current = current.left;
+            } else if (w.compareTo(current.word) > 0) {
+                temp = current;
+                lst.add(temp);
+                current = current.right;
+            } else
+                break;
+        }
+
+        if (current != null)
+            return;
+        else {
+            if (w.compareTo(temp.word) > 0) {
+                temp.right = new Node(w, temp);
+                size++;
+                updateHeight(temp, height(temp.left), height(temp.right));
+            } else {
+                temp.left = new Node(w, temp);
+                size++;
+                updateHeight(temp, height(temp.left), height(temp.right));
+            }
+        }
+
+        for (int i = lst.size() - 1; i >= 0; i--)
+            rebalance(lst.get(i));
     }
 
     /**
