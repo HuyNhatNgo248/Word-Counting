@@ -154,14 +154,12 @@ public class AVL {
             if (w.compareTo(temp.word) > 0) {
                 temp.right = new Node(w, temp);
                 size++;
-                updateHeight(temp, height(temp.left), height(temp.right));
             } else {
                 temp.left = new Node(w, temp);
                 size++;
-                updateHeight(temp, height(temp.left), height(temp.right));
             }
         }
-
+        updateHeight(temp, height(temp.left), height(temp.right));
         for (int i = lst.size() - 1; i >= 0; i--)
             rebalance(lst.get(i));
     }
@@ -358,7 +356,24 @@ public class AVL {
 class testAVL {
     public static void main(String[] args) {
         AVL a = new AVL();
-        a.avlInsert("moo");
+        a.avlInsert("a");
+        a.avlInsert("b");
+        a.avlInsert("c");
+        a.avlInsert("d");
+        a.avlInsert("e");
+        a.avlInsert("f");
+        a.avlInsert("q");
+        a.avlInsert("x");
+        a.avlInsert("y");
+        a.avlInsert("z");
+        a.avlInsert("m");
+        a.avlInsert("n");
+        a.avlInsert("l");
+        a.avlInsert("o");
+        a.avlInsert("s");
+        a.avlInsert("r");
+        a.avlInsert("q");
+        a.avlInsert("p");
         a.preorder(a.root);
         System.out.println();
         a.inorder(a.root);
@@ -368,70 +383,7 @@ class testAVL {
         System.out.println();
 
 
-        a.avlInsert("quack");
-        System.out.println();
-        a.preorder(a.root);
-        System.out.println();
-        a.inorder(a.root);
-        System.out.println();
-        a.postorder(a.root);
-        System.out.println();
-        System.out.println();
 
-
-        a.avlInsert("marmot");
-        System.out.println();
-        a.preorder(a.root);
-        System.out.println();
-        a.inorder(a.root);
-        System.out.println();
-        a.postorder(a.root);
-        System.out.println();
-        System.out.println();
-
-
-        a.avlInsert("oink");
-        System.out.println();
-        a.preorder(a.root);
-        System.out.println();
-        a.inorder(a.root);
-        System.out.println();
-        a.postorder(a.root);
-        System.out.println();
-        System.out.println();
-
-
-        a.avlInsert("baa");
-        System.out.println();
-        a.preorder(a.root);
-        System.out.println();
-        a.inorder(a.root);
-        System.out.println();
-        a.postorder(a.root);
-        System.out.println();
-        System.out.println();
-
-
-        a.avlInsert("moo");
-        System.out.println();
-        a.preorder(a.root);
-        System.out.println();
-        a.inorder(a.root);
-        System.out.println();
-        a.postorder(a.root);
-        System.out.println();
-        System.out.println();
-
-
-        a.avlInsert("meow");
-        System.out.println();
-        a.preorder(a.root);
-        System.out.println();
-        a.inorder(a.root);
-        System.out.println();
-        a.postorder(a.root);
-        System.out.println();
-        System.out.println();
     }
 
 
