@@ -68,21 +68,24 @@ public class AVL {
             if (w.compareTo(temp.word) > 0) {
                 temp.right = new Node(w, temp);
                 size++;
-                updateHeight(n);
+                updateHeight(temp, height(temp.left), height(temp.right));
             } else {
                 temp.left = new Node(w, temp);
                 size++;
-                updateHeight(n);
+                updateHeight(temp, height(temp.left), height(temp.right));
             }
         }
     }
 
-    private void updateHeight(Node n) {
+    private void updateHeight(Node n, int left, int right) {
         if (n == null)
             return;
         else {
-            n.height = height(n);
-            updateHeight(n.parent);
+            n.height = Integer.max(left, right) + 1;
+            if (n.parent.left == null)
+                updateHeight(n.parent, -1, n.parent.right.height);
+            else
+                updateHeight(n.parent, n.parent.left.height, -1);
         }
     }
 
@@ -136,7 +139,7 @@ public class AVL {
 
         y.left = x;
         x.parent = y;
-        updateHeight(x);
+        updateHeight(x, height(x.left), height(x.right));
     }
 
     /**
@@ -158,7 +161,7 @@ public class AVL {
         else y.parent.left = x;
         x.right = y;
         y.parent = x;
-        updateHeight(y);
+        updateHeight(y, height(y.left), height(y.right));
     }
 
     /**
@@ -190,7 +193,14 @@ public class AVL {
 
 
     private int getbalance(Node n) {
-        return height(n.right) - height(n.left);
+        if (n.left == null && n.right != null)
+            return n.right.height + 1;
+        else if (n.left != null && n.right == null)
+            return -1 - n.left.height;
+        else if (n.left != null && n.right != null)
+            return 0;
+        else
+            return n.right.height - n.left.height;
     }
 
 
