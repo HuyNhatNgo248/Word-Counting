@@ -1,7 +1,5 @@
 package avl;
 
-import java.util.ArrayList;
-
 public class AVL {
 
     public Node root;
@@ -20,7 +18,8 @@ public class AVL {
         return search(root, w);
     }
 
-    private Node search(Node n, String w) {
+    //chage back to private later
+    public Node search(Node n, String w) {
         if (n == null) {
             return null;
         }
@@ -40,6 +39,7 @@ public class AVL {
         if (root == null) {
             root = new Node(w);
             size = 1;
+            root.height = 0;
             return;
         }
         bstInsert(root, w);
@@ -80,24 +80,25 @@ public class AVL {
     }
 
     private void updateHeight(Node n, int left, int right) {
-        if (n == root)
-            n.height = Integer.max(left, right) + 1;
-        else {
-            n.height = Integer.max(left, right) + 1;
+        if (n == root) {
+            n.height = Math.max(left, right) + 1;
+        } else {
+            n.height = Math.max(left, right) + 1;
             Node parentLeft = n.parent.left;
             Node parentRight = n.parent.right;
-            if (parentLeft == null && parentRight != null)
+            if (parentLeft == null && parentRight != null) {
                 updateHeight(n.parent, -1, parentRight.height);
-            else if (parentLeft != null && parentRight == null)
+            } else if (parentLeft != null && parentRight == null) {
                 updateHeight(n.parent, parentLeft.height, -1);
-            else if (parentLeft != null && parentRight != null)
+            } else if (parentLeft == null && parentRight == null) {
                 updateHeight(n.parent, -1, -1);
-            else
+            } else {
                 updateHeight(n.parent, parentLeft.height, parentRight.height);
+            }
         }
     }
 
-    private int height(Node n) {
+    public int height(Node n) {
         if (n == null)
             return -1;
         return getHeight(n) - 1;
@@ -119,6 +120,12 @@ public class AVL {
      */
     public void avlInsert(String w) {
         // TODO
+        if (root == null) {
+            root = new Node(w);
+            size = 1;
+            root.height = 0;
+            return;
+        }
         avlInsert(root, w);
     }
 
@@ -126,42 +133,28 @@ public class AVL {
      *  precondition: the tree is AVL balanced and n is not null */
     private void avlInsert(Node n, String w) {
         // TODO
-        Node current = n;
-        Node temp = null;
-        ArrayList<Node> lst = new ArrayList<>();
-        //null root
-        if (n == null) {
-            root = new Node(w, n);
-            size++;
+        if (n.word.compareTo(w) == 0)
             return;
-        }
-        while (current != null) {
-            if (w.compareTo(current.word) < 0) {
-                temp = current;
-                lst.add(temp);
-                current = current.left;
-            } else if (w.compareTo(current.word) > 0) {
-                temp = current;
-                lst.add(temp);
-                current = current.right;
-            } else
-                break;
-        }
+        if (w.compareTo(n.word) < 0) {
+            if (n.left != null)
+                avlInsert(n.left, w);
+            else {
+                n.left = new Node(w, n);
+                size++;
+                updateHeight(n, height(n.left), height(n.right));
 
-        if (current != null)
-            return;
-        else {
-            if (w.compareTo(temp.word) > 0) {
-                temp.right = new Node(w, temp);
+            }
+        } else {
+            if (n.right != null)
+                avlInsert(n.right, w);
+            else {
+                n.right = new Node(w, n);
                 size++;
-            } else {
-                temp.left = new Node(w, temp);
-                size++;
+                updateHeight(n, height(n.left), height(n.right));
             }
         }
-        updateHeight(temp, height(temp.left), height(temp.right));
-        for (int i = lst.size() - 1; i >= 0; i--)
-            rebalance(lst.get(i));
+
+        rebalance(n);
     }
 
     /**
@@ -356,24 +349,110 @@ public class AVL {
 class testAVL {
     public static void main(String[] args) {
         AVL a = new AVL();
-        a.avlInsert("a");
-        a.avlInsert("b");
-        a.avlInsert("c");
-        a.avlInsert("d");
-        a.avlInsert("e");
-        a.avlInsert("f");
-        a.avlInsert("q");
-        a.avlInsert("x");
-        a.avlInsert("y");
-        a.avlInsert("z");
-        a.avlInsert("m");
-        a.avlInsert("n");
-        a.avlInsert("l");
-        a.avlInsert("o");
-        a.avlInsert("s");
-        a.avlInsert("r");
-        a.avlInsert("q");
-        a.avlInsert("p");
+        a.avlInsert("dmim");
+        a.avlInsert("fefb");
+        a.avlInsert("bvry");
+        a.avlInsert("kivz");
+        a.avlInsert("ohkq");
+        a.avlInsert("jrth");
+        a.avlInsert("gwrg");
+        a.avlInsert("mqon");
+        a.avlInsert("ranl");
+        a.avlInsert("lwkw");
+        a.avlInsert("vgen");
+        a.avlInsert("eadj");
+        a.avlInsert("taaf");
+        a.avlInsert("ctvf");
+        a.avlInsert("twpx");
+        a.avlInsert("gcbp");
+        a.avlInsert("pndi");
+        a.avlInsert("lbvv");
+        a.avlInsert("gzvg");
+        a.avlInsert("ktfr");
+        a.avlInsert("matu");
+        a.avlInsert("rchs");
+        a.avlInsert("ejhd");
+        a.avlInsert("tinh");
+        a.avlInsert("inac");
+        a.avlInsert("svfl");
+        a.avlInsert("cjwj");
+        a.avlInsert("ixuy");
+        a.avlInsert("lsxh");
+        a.avlInsert("opvy");
+        a.avlInsert("bjdo");
+        a.avlInsert("vtud");
+        a.avlInsert("fbhz");
+        a.avlInsert("murr");
+        a.avlInsert("opnu");
+        a.avlInsert("usue");
+        a.avlInsert("rztl");
+        a.avlInsert("xqyh");
+        a.avlInsert("rgbo");
+        a.avlInsert("zxfd");
+        a.avlInsert("bwmu");
+        a.avlInsert("muzo");
+        a.avlInsert("gzuh");
+        a.avlInsert("xtze");
+        a.avlInsert("bsey");
+        a.avlInsert("ruqb");
+        a.avlInsert("xlcp");
+        a.avlInsert("xtcl");
+        a.avlInsert("ppol");
+        a.avlInsert("dwwi");
+        a.avlInsert("xxfu");
+        a.avlInsert("kaqq");
+        a.avlInsert("wiae");
+        a.avlInsert("fzhr");
+        a.avlInsert("uzqn");
+        a.avlInsert("lhvp");
+        a.avlInsert("mqpy");
+        a.avlInsert("sath");
+        a.avlInsert("aigx");
+        a.avlInsert("bkde");
+        a.avlInsert("frsr");
+        a.avlInsert("tsyj");
+        a.avlInsert("kjrl");
+        a.avlInsert("rkjw");
+        a.avlInsert("kwvl");
+        a.avlInsert("zocw");
+        a.avlInsert("sbsx");
+        a.avlInsert("tywp");
+        a.avlInsert("zomf");
+        a.avlInsert("leec");
+        a.avlInsert("hbpf");
+        a.avlInsert("fdiq");
+        a.avlInsert("ijxs");
+        a.avlInsert("kurn");
+        a.avlInsert("wvum");
+        a.avlInsert("pgrs");
+        a.avlInsert("jxbq");
+        a.avlInsert("yxzx");
+        a.avlInsert("vpaq");
+        a.avlInsert("jjeq");
+        a.avlInsert("naso");
+        a.avlInsert("obmk");
+        a.avlInsert("hdig");
+        a.avlInsert("tshu");
+        a.avlInsert("xrym");
+        a.avlInsert("wfki");
+        a.avlInsert("kvgb");
+        a.avlInsert("wpip");
+        a.avlInsert("jqit");
+        a.avlInsert("qbto");
+        a.avlInsert("ersx");
+        a.avlInsert("moph");
+        a.avlInsert("hvjh");
+        a.avlInsert("tdur");
+        a.avlInsert("umoi");
+        a.avlInsert("pxwa");
+        a.avlInsert("nslc");
+        a.avlInsert("kmrd");
+        a.avlInsert("boms");
+        a.avlInsert("ldsu");
+        displayTraversal(a);
+    }
+
+    public static void displayTraversal(AVL a) {
         a.preorder(a.root);
         System.out.println();
         a.inorder(a.root);
@@ -381,10 +460,6 @@ class testAVL {
         a.postorder(a.root);
         System.out.println();
         System.out.println();
-
-
-
     }
-
 
 }
