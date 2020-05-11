@@ -25,7 +25,6 @@ public class AVL {
         return search(root, w);
     }
 
-    //chage back to private later
     private Node search(Node n, String w) {
         if (n == null) {
             return null;
@@ -258,7 +257,33 @@ public class AVL {
 
     /* remove v from the tree rooted at n */
     private void remove(Node n, String w) {
-        return; // (enhancement TODO - do the base assignment first)
+        // (enhancement TODO - do the base assignment first)
+        Node deleteNode = search(n, w);
+        //case 1: n has no children (is a leaf)
+        if (deleteNode.right == null && deleteNode.left == null) {
+            if (deleteNode.parent.left == deleteNode)
+                deleteNode.parent.left = null;
+            else
+                deleteNode.parent.right = null;
+        } else if ((deleteNode.right != null && deleteNode.left == null) ||
+                (deleteNode.right == null && deleteNode.left != null)) {
+            //case 2:n has one child
+            if (deleteNode.right == null) {
+                deleteNode.parent = deleteNode.left;
+            } else
+                deleteNode.parent = deleteNode.right;
+        } else {
+            //case 3: n has two children
+            Node min = getMinNode(deleteNode.right);
+            deleteNode.word = min.word;
+            remove(min, min.word);
+        }
+    }
+
+    private Node getMinNode(Node n) {
+        if (n.left == null)
+            return n;
+        return getMinNode(n.left);
     }
 
     /**
@@ -325,6 +350,29 @@ public class AVL {
             left = l;
             right = r;
         }
+    }
+}
+
+class testAVL {
+    public static void main(String[] args) {
+        AVL tree = new AVL();
+        tree.bstInsert("g");
+        tree.bstInsert("d");
+        tree.bstInsert("b");
+        tree.bstInsert("a");
+        tree.bstInsert("t");
+        tree.bstInsert("k");
+        tree.printTree();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        tree.remove("g");
+        tree.printTree();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        tree.remove("k");
+        tree.printTree();
     }
 }
 
