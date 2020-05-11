@@ -258,32 +258,7 @@ public class AVL {
     /* remove v from the tree rooted at n */
     private void remove(Node n, String w) {
         // (enhancement TODO - do the base assignment first)
-        Node deleteNode = search(n, w);
-        //case 1: n has no children (is a leaf)
-        if (deleteNode.right == null && deleteNode.left == null) {
-            if (deleteNode.parent.left == deleteNode)
-                deleteNode.parent.left = null;
-            else
-                deleteNode.parent.right = null;
-        } else if ((deleteNode.right != null && deleteNode.left == null) ||
-                (deleteNode.right == null && deleteNode.left != null)) {
-            //case 2:n has one child
-            if (deleteNode.right == null) {
-                deleteNode.parent = deleteNode.left;
-            } else
-                deleteNode.parent = deleteNode.right;
-        } else {
-            //case 3: n has two children
-            Node min = getMinNode(deleteNode.right);
-            deleteNode.word = min.word;
-            remove(min, min.word);
-        }
-    }
-
-    private Node getMinNode(Node n) {
-        if (n.left == null)
-            return n;
-        return getMinNode(n.left);
+        return;
     }
 
     /**
