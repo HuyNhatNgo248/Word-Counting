@@ -1,3 +1,11 @@
+/**
+ * Huy Nhat Ngo
+ * May 10, 2020
+ * Spring 2020
+ * This class accepts file or system.in until EOF to efficiently read, process
+ * and display the total and unique number of words
+ */
+
 package avl;
 
 import java.io.File;
@@ -50,6 +58,4 @@ public class Vocab {
         c.unique = tree.getSize();
         return c;
     }
-
-
 }

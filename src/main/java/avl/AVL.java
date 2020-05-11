@@ -2,7 +2,7 @@
  * Huy Nhat Ngo
  * May 10, 2020
  * Spring 2020
- * This program implements and turn the BST into an AVL tree by maintaining the AVL
+ * This class implements and turn the BST into an AVL tree by maintaining the AVL
  * balance property on insertion.
  */
 package avl;
@@ -85,6 +85,10 @@ public class AVL {
         }
     }
 
+    /**
+     * pre: n is not null, left and right indicates the node left and right child height
+     * recursively update height at specified node to the root
+     */
     private void updateHeight(Node n, int left, int right) {
         if (n == root) {
             n.height = Math.max(left, right) + 1;
@@ -104,6 +108,11 @@ public class AVL {
         }
     }
 
+    /**
+     * helper method
+     * pre: n is not null
+     * post: return the height at specified node
+     */
     private int height(Node n) {
         if (n == null)
             return -1;
@@ -129,7 +138,6 @@ public class AVL {
         if (root == null) {
             root = new Node(w);
             size = 1;
-            root.height = 0;
             return;
         }
         avlInsert(root, w);
@@ -139,8 +147,10 @@ public class AVL {
      *  precondition: the tree is AVL balanced and n is not null */
     private void avlInsert(Node n, String w) {
         // TODO
-        if (n.word.compareTo(w) == 0)
+        if (n.word.compareTo(w) == 0) {
+            n.count++;
             return;
+        }
         if (w.compareTo(n.word) < 0) {
             if (n.left != null)
                 avlInsert(n.left, w);
@@ -235,7 +245,11 @@ public class AVL {
         }
     }
 
-
+    /**
+     * helper method
+     * pre: n is not null
+     * post: return the balance factor of the parent node using children's heights
+     */
     private int getbalance(Node n) {
         if (n.left == null && n.right != null)
             return n.right.height + 1;
@@ -258,34 +272,106 @@ public class AVL {
     /* remove v from the tree rooted at n */
     private void remove(Node n, String w) {
         // (enhancement TODO - do the base assignment first)
-        Node deleteNode = search(n, w);
+        Node del = search(n, w);
+        //nothing to delete
+        if (del == null)
+            return;
+
+        //decrement when count is not 0
+        if (del.count != 0) {
+            del.count--;
+            return;
+        }
+
         //case 1: n has no children (is a leaf)
-        if (deleteNode.right == null && deleteNode.left == null) {
-            if (deleteNode.parent.left == deleteNode)
-                deleteNode.parent.left = null;
-            else
-                deleteNode.parent.right = null;
-        } else if ((deleteNode.right != null && deleteNode.left == null) ||
-                (deleteNode.right == null && deleteNode.left != null)) {
+        if (del.right == null && del.left == null) {
+            if (del.parent == null) {
+                root = null;
+                return;
+            }
+            if (del.parent.left == del) {
+                del.parent.left = null;
+                updateHeightRemove(del.parent);
+                rebalance(root);
+            } else {
+                del.parent.right = null;
+                updateHeightRemove(del.parent);
+                rebalance(root);
+            }
+        } else if (del.right == null || del.left == null) {
             //case 2:n has one child
-            if (deleteNode.right == null) {
-                deleteNode.parent = deleteNode.left;
-            } else
-                deleteNode.parent = deleteNode.right;
+            if (del.parent == null) {
+                if (del.left != null) {
+                    root = del.left;
+                    root.parent = null;
+                    rebalance(root);
+                } else {
+                    root = del.right;
+                    root.parent = null;
+                    rebalance(root);
+                }
+            } else {
+                if (del.parent.right == del) {
+                    if (del.right != null) {
+                        del.right.parent = del.parent;
+                        del.parent.right = del.right;
+                        updateHeightRemove(del.parent);
+                        rebalance(root);
+                    } else {
+                        del.left.parent = del.parent;
+                        del.parent.right = del.left;
+                        updateHeightRemove(del.parent);
+                        rebalance(root);
+                    }
+                } else {
+                    if (del.right != null) {
+                        del.right.parent = del.parent;
+                        del.parent.left = del.right;
+                        updateHeightRemove(del.parent);
+                        rebalance(root);
+                    } else {
+                        del.left.parent = del.parent;
+                        del.parent.left = del.left;
+                        updateHeightRemove(del.parent);
+                        rebalance(root);
+                    }
+                }
+            }
         } else {
             //case 3: n has two children
-            Node min = getMinNode(deleteNode.right);
-            deleteNode.word = min.word;
+            Node min = getMinNode(del.right);
+            del.word = min.word;
+            del.count = min.count;
+            min.count = 0;
             remove(min, min.word);
         }
     }
 
+    /**
+     * helper method
+     * pre: n is not null
+     * post: call updateHeight to recursively update the deleted node's ancestor
+     */
+    private void updateHeightRemove(Node n) {
+        if (n.right == null && n.left == null)
+            updateHeight(n, -1, -1);
+        else if (n.right == null)
+            updateHeight(n, n.left.height, -1);
+        else
+            updateHeight(n, -1, n.right.height);
+
+    }
+
+    /**
+     * helper method
+     * pre: n is not null
+     * post: return node with smallest value
+     */
     private Node getMinNode(Node n) {
         if (n.left == null)
             return n;
         return getMinNode(n.left);
     }
-
 
 
     /**
@@ -317,6 +403,7 @@ public class AVL {
         public Node left;
         public Node right;
         public int height;
+        public int count; //enhancement #3
 
         public String toString() {
             return word + "(" + height + ")";
