@@ -1,3 +1,10 @@
+/**
+ * Huy Nhat Ngo
+ * May 10, 2020
+ * Spring 2020
+ * This program implements and turn the BST into an AVL tree by maintaining the AVL
+ * balance property on insertion.
+ */
 package avl;
 
 public class AVL {
@@ -19,7 +26,7 @@ public class AVL {
     }
 
     //chage back to private later
-    public Node search(Node n, String w) {
+    private Node search(Node n, String w) {
         if (n == null) {
             return null;
         }
@@ -98,7 +105,7 @@ public class AVL {
         }
     }
 
-    public int height(Node n) {
+    private int height(Node n) {
         if (n == null)
             return -1;
         return getHeight(n) - 1;
@@ -319,147 +326,5 @@ public class AVL {
             right = r;
         }
     }
-
-    //delete later
-    public void preorder(Node root) {
-        if (root == null)
-            return;
-        System.out.print(root.word + " ");
-        preorder(root.left);
-        preorder(root.right);
-    }
-
-    public void inorder(Node root) {
-        if (root == null)
-            return;
-        inorder(root.left);
-        System.out.print(root.word + " ");
-        inorder(root.right);
-    }
-
-    public void postorder(Node root) {
-        if (root == null)
-            return;
-        postorder(root.left);
-        postorder(root.right);
-        System.out.print(root.word + " ");
-    }
 }
 
-class testAVL {
-    public static void main(String[] args) {
-        AVL a = new AVL();
-        a.avlInsert("dmim");
-        a.avlInsert("fefb");
-        a.avlInsert("bvry");
-        a.avlInsert("kivz");
-        a.avlInsert("ohkq");
-        a.avlInsert("jrth");
-        a.avlInsert("gwrg");
-        a.avlInsert("mqon");
-        a.avlInsert("ranl");
-        a.avlInsert("lwkw");
-        a.avlInsert("vgen");
-        a.avlInsert("eadj");
-        a.avlInsert("taaf");
-        a.avlInsert("ctvf");
-        a.avlInsert("twpx");
-        a.avlInsert("gcbp");
-        a.avlInsert("pndi");
-        a.avlInsert("lbvv");
-        a.avlInsert("gzvg");
-        a.avlInsert("ktfr");
-        a.avlInsert("matu");
-        a.avlInsert("rchs");
-        a.avlInsert("ejhd");
-        a.avlInsert("tinh");
-        a.avlInsert("inac");
-        a.avlInsert("svfl");
-        a.avlInsert("cjwj");
-        a.avlInsert("ixuy");
-        a.avlInsert("lsxh");
-        a.avlInsert("opvy");
-        a.avlInsert("bjdo");
-        a.avlInsert("vtud");
-        a.avlInsert("fbhz");
-        a.avlInsert("murr");
-        a.avlInsert("opnu");
-        a.avlInsert("usue");
-        a.avlInsert("rztl");
-        a.avlInsert("xqyh");
-        a.avlInsert("rgbo");
-        a.avlInsert("zxfd");
-        a.avlInsert("bwmu");
-        a.avlInsert("muzo");
-        a.avlInsert("gzuh");
-        a.avlInsert("xtze");
-        a.avlInsert("bsey");
-        a.avlInsert("ruqb");
-        a.avlInsert("xlcp");
-        a.avlInsert("xtcl");
-        a.avlInsert("ppol");
-        a.avlInsert("dwwi");
-        a.avlInsert("xxfu");
-        a.avlInsert("kaqq");
-        a.avlInsert("wiae");
-        a.avlInsert("fzhr");
-        a.avlInsert("uzqn");
-        a.avlInsert("lhvp");
-        a.avlInsert("mqpy");
-        a.avlInsert("sath");
-        a.avlInsert("aigx");
-        a.avlInsert("bkde");
-        a.avlInsert("frsr");
-        a.avlInsert("tsyj");
-        a.avlInsert("kjrl");
-        a.avlInsert("rkjw");
-        a.avlInsert("kwvl");
-        a.avlInsert("zocw");
-        a.avlInsert("sbsx");
-        a.avlInsert("tywp");
-        a.avlInsert("zomf");
-        a.avlInsert("leec");
-        a.avlInsert("hbpf");
-        a.avlInsert("fdiq");
-        a.avlInsert("ijxs");
-        a.avlInsert("kurn");
-        a.avlInsert("wvum");
-        a.avlInsert("pgrs");
-        a.avlInsert("jxbq");
-        a.avlInsert("yxzx");
-        a.avlInsert("vpaq");
-        a.avlInsert("jjeq");
-        a.avlInsert("naso");
-        a.avlInsert("obmk");
-        a.avlInsert("hdig");
-        a.avlInsert("tshu");
-        a.avlInsert("xrym");
-        a.avlInsert("wfki");
-        a.avlInsert("kvgb");
-        a.avlInsert("wpip");
-        a.avlInsert("jqit");
-        a.avlInsert("qbto");
-        a.avlInsert("ersx");
-        a.avlInsert("moph");
-        a.avlInsert("hvjh");
-        a.avlInsert("tdur");
-        a.avlInsert("umoi");
-        a.avlInsert("pxwa");
-        a.avlInsert("nslc");
-        a.avlInsert("kmrd");
-        a.avlInsert("boms");
-        a.avlInsert("ldsu");
-        displayTraversal(a);
-    }
-
-    public static void displayTraversal(AVL a) {
-        a.preorder(a.root);
-        System.out.println();
-        a.inorder(a.root);
-        System.out.println();
-        a.postorder(a.root);
-        System.out.println();
-        System.out.println();
-    }
-
-}
