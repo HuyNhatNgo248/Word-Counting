@@ -85,6 +85,10 @@ public class AVL {
         }
     }
 
+    /**
+     * pre: n is not null, left and right indicates the node left and right child height
+     * recursively update height at specified node to the root
+     */
     private void updateHeight(Node n, int left, int right) {
         if (n == root) {
             n.height = Math.max(left, right) + 1;
@@ -104,6 +108,11 @@ public class AVL {
         }
     }
 
+    /**
+     * helper method
+     * pre: n is not null
+     * post: return the height at specified node
+     */
     private int height(Node n) {
         if (n == null)
             return -1;
@@ -235,7 +244,11 @@ public class AVL {
         }
     }
 
-
+    /**
+     * helper method
+     * pre: n is not null
+     * post: return the balance factor of the parent node using children's heights
+     */
     private int getbalance(Node n) {
         if (n.left == null && n.right != null)
             return n.right.height + 1;
@@ -328,26 +341,4 @@ public class AVL {
     }
 }
 
-class testAVL {
-    public static void main(String[] args) {
-        AVL tree = new AVL();
-        tree.bstInsert("g");
-        tree.bstInsert("d");
-        tree.bstInsert("b");
-        tree.bstInsert("a");
-        tree.bstInsert("t");
-        tree.bstInsert("k");
-        tree.printTree();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        tree.remove("g");
-        tree.printTree();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        tree.remove("k");
-        tree.printTree();
-    }
-}
 

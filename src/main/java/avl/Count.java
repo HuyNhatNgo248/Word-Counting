@@ -1,3 +1,11 @@
+/**
+ * Huy Nhat Ngo
+ * May 10, 2020
+ * Spring 2020
+ * This class holds the instance of total and unique words to be displayed
+ */
+
+
 package avl;
 
 /**
