@@ -286,15 +286,18 @@ public class AVL {
         //case 1: n has no children (is a leaf)
         if (del.right == null && del.left == null) {
             if (del.parent == null) {
+                size = 0;
                 root = null;
                 return;
             }
             if (del.parent.left == del) {
                 del.parent.left = null;
+                size--;
                 updateHeightRemove(del.parent);
                 rebalance(root);
             } else {
                 del.parent.right = null;
+                size--;
                 updateHeightRemove(del.parent);
                 rebalance(root);
             }
@@ -302,10 +305,12 @@ public class AVL {
             //case 2:n has one child
             if (del.parent == null) {
                 if (del.left != null) {
+                    size--;
                     root = del.left;
                     root.parent = null;
                     rebalance(root);
                 } else {
+                    size--;
                     root = del.right;
                     root.parent = null;
                     rebalance(root);
@@ -313,11 +318,13 @@ public class AVL {
             } else {
                 if (del.parent.right == del) {
                     if (del.right != null) {
+                        size--;
                         del.right.parent = del.parent;
                         del.parent.right = del.right;
                         updateHeightRemove(del.parent);
                         rebalance(root);
                     } else {
+                        size--;
                         del.left.parent = del.parent;
                         del.parent.right = del.left;
                         updateHeightRemove(del.parent);
@@ -325,11 +332,13 @@ public class AVL {
                     }
                 } else {
                     if (del.right != null) {
+                        size--;
                         del.right.parent = del.parent;
                         del.parent.left = del.right;
                         updateHeightRemove(del.parent);
                         rebalance(root);
                     } else {
+                        size--;
                         del.left.parent = del.parent;
                         del.parent.left = del.left;
                         updateHeightRemove(del.parent);
@@ -343,6 +352,7 @@ public class AVL {
             del.word = min.word;
             del.count = min.count;
             min.count = 0;
+            size--;
             remove(min, min.word);
         }
     }
