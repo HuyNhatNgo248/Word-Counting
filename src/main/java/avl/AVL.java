@@ -352,7 +352,6 @@ public class AVL {
             del.word = min.word;
             del.count = min.count;
             min.count = 0;
-            size--;
             remove(min, min.word);
         }
     }
