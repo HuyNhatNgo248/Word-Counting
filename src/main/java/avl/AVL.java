@@ -138,6 +138,7 @@ public class AVL {
         if (root == null) {
             root = new Node(w);
             size = 1;
+            root.count++;
             return;
         }
         avlInsert(root, w);
@@ -156,6 +157,7 @@ public class AVL {
                 avlInsert(n.left, w);
             else {
                 n.left = new Node(w, n);
+                n.left.count++;
                 size++;
                 updateHeight(n, height(n.left), height(n.right));
 
@@ -165,6 +167,7 @@ public class AVL {
                 avlInsert(n.right, w);
             else {
                 n.right = new Node(w, n);
+                n.right.count++;
                 size++;
                 updateHeight(n, height(n.left), height(n.right));
             }
@@ -278,7 +281,7 @@ public class AVL {
             return;
 
         //decrement when count is not 0
-        if (del.count != 0) {
+        if (del.count != 1) {
             del.count--;
             return;
         }
@@ -351,7 +354,7 @@ public class AVL {
             Node min = getMinNode(del.right);
             del.word = min.word;
             del.count = min.count;
-            min.count = 0;
+            min.count = 1;
             remove(min, min.word);
         }
     }
@@ -450,4 +453,6 @@ public class AVL {
         }
     }
 }
+
+
 
