@@ -286,6 +286,8 @@ public class AVL {
         return getMinNode(n.left);
     }
 
+
+
     /**
      * print a sideways representation of the tree - root at left,
      * right is up, left is down.
@@ -350,29 +352,6 @@ public class AVL {
             left = l;
             right = r;
         }
-    }
-}
-
-class testAVL {
-    public static void main(String[] args) {
-        AVL tree = new AVL();
-        tree.bstInsert("g");
-        tree.bstInsert("d");
-        tree.bstInsert("b");
-        tree.bstInsert("a");
-        tree.bstInsert("t");
-        tree.bstInsert("k");
-        tree.printTree();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        tree.remove("g");
-        tree.printTree();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        tree.remove("k");
-        tree.printTree();
     }
 }
 
