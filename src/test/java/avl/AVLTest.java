@@ -1,14 +1,21 @@
+
+/**
+ * Huy Nhat Ngo
+ * May 10, 2020
+ * Spring 2020
+ * Unit test for AVL.java methods
+ */
+
 package avl;
 
-import static org.junit.Assert.*;
 import org.junit.FixMethodOrder;
-
-import java.util.Arrays;
-
 import org.junit.Rule;
-import org.junit.rules.Timeout;
 import org.junit.Test;
+import org.junit.rules.Timeout;
 import org.junit.runners.MethodSorters;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
